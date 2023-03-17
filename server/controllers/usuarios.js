@@ -10,6 +10,8 @@ const getUsuarios = (req, res) => {
 
 const crearUsuario = (req, res) => {
 
+    console.log(req.body)
+
     return res.json({
         ok: true,
         msg: 'Usuario creado'

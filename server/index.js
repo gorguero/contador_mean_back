@@ -9,14 +9,8 @@ const app = express();
 
 // dbCONN();
 
-// app.get('/', (req, res) => {
-
-//     res.json({
-//         ok: true,
-//         msg: 'Conexión establecida'
-//     })
-
-// });
+//Lectura del json
+app.use( express.json() );
 
 app.use( '', require('./routes/usuarios') );
 
