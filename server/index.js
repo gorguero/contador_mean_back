@@ -1,7 +1,10 @@
 const express = require('express');
+const { dbCONN } = require('./database/db');
 require('dotenv').config();
 
 const app = express(); //Creación de nuestro servidor
+
+dbCONN();
 
 app.get('/', (req, res) => {
 
