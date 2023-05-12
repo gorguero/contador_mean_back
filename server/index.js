@@ -1,4 +1,5 @@
-const express = require('express'); 
+const express = require('express');
+require('dotenv').config();
 
 const app = express(); //Creación de nuestro servidor
 
@@ -8,9 +9,9 @@ app.get('/', (req, res) => {
         ok: true,
         msg: 'OK'
     })
-    
+
 })
 
-app.listen( 5000, () => {
-    console.log('Conectado al puerto 5000')
+app.listen( process.env.PORT, () => {
+    console.log(`Conectado al puerto ${ process.env.PORT }`);
 } )
