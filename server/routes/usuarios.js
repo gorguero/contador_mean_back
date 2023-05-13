@@ -11,11 +11,18 @@ router.post('/',
         check('password','El password es obligatorio').not().isEmpty(),
         validarCampos
     ]
-    ,crearUsuario);
+,crearUsuario);
 
 router.get('/', getUsuarios);
 
-router.put('/:id', actualizarUsuario);
+router.put('/:id',
+    [
+        check('nombre','El nombre es obligatorio').not().isEmpty(),
+        check('email','El email es obligatorio').not().isEmpty(),
+        check('password','El password es obligatorio').not().isEmpty(),
+        validarCampos
+    ] 
+,actualizarUsuario);
 
 router.delete('/:id', eliminarUsuario)
 

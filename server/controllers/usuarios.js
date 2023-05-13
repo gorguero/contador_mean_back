@@ -47,11 +47,32 @@ const crearUsuario = async(req, res = response) => {
 
 }
 
-const actualizarUsuario = (req, res) => {
-    return res.json({
-        ok: true,
-        msg: 'Usuario editao'
-    })
+const actualizarUsuario = async(req, res = response) => {
+    
+    const uid = req.params.id;
+
+    try {
+        
+
+
+        //Actualizacion de los datos
+        const { password, email, ...campos } = req.body;
+        
+        campos.email = email;
+        const usuarioActualizado = await Usuario.findByIdAndUpdate( uid, campos, { new: true } );
+
+        res.json({
+            ok: true,
+            usuario: usuarioActualizado
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado al revisar los datos'
+        })
+    }
+
 }
 
 const eliminarUsuario = (req, res) => {
