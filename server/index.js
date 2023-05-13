@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const app = express(); //Creación de nuestro servidor
 
-// dbCONN();
+dbCONN(); //Coneccion con la bd 
 
 app.use( express.json() ); //Lectura del json
 
