@@ -15,6 +15,15 @@ const crearUsuario = async(req, res = response) => {
 
     try {
         
+        const existeEmail = await Usuario.findOne({ email });
+
+        if (existeEmail) {
+            return res.status(400).json({
+                ok: false,
+                msg: "El correo ya está registrado"
+            })
+        }
+
         const usuario = new Usuario( req.body );
 
         //Guardar en la base de datos
