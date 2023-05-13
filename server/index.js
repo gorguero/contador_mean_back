@@ -6,6 +6,8 @@ const app = express(); //Creación de nuestro servidor
 
 // dbCONN();
 
+app.use( express.json() ); //Lectura del json
+
 app.use( '', require('./routes/usuarios') );
 
 app.listen( process.env.PORT, () => {
