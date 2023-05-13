@@ -2,11 +2,15 @@ const { response } = require('express');
 const Usuario = require('../models/usuario');
 const bcrypt = require('bcryptjs');
 
-const getUsuarios = (req, res) => {
-    return res.json({
+const getUsuarios = async(req, res = response) => {
+    
+    const usuarios = await Usuario.find({}, 'nombre email curp telefono role pdf');
+
+    res.json({
         ok: true,
-        msg: 'Usuario obtenido'
-    })
+        usuarios
+    });
+
 }
 
 const crearUsuario = async(req, res = response) => {
