@@ -4,16 +4,11 @@ require('dotenv').config();
 
 const app = express(); //Creación de nuestro servidor
 
-dbCONN();
+dbCONN(); //Coneccion con la bd 
 
-app.get('/', (req, res) => {
+app.use( express.json() ); //Lectura del json
 
-    res.json({
-        ok: true,
-        msg: 'OK'
-    })
-
-})
+app.use( '', require('./routes/usuarios') );
 
 app.listen( process.env.PORT, () => {
     console.log(`Conectado al puerto ${ process.env.PORT }`);
