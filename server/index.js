@@ -8,7 +8,8 @@ dbCONN(); //Coneccion con la bd
 
 app.use( express.json() ); //Lectura del json
 
-app.use( '', require('./routes/usuarios') );
+app.use( '/usuarios', require('./routes/usuarios') );
+app.use( '/login', require('./routes/auth') );
 
 app.listen( process.env.PORT, () => {
     console.log(`Conectado al puerto ${ process.env.PORT }`);
