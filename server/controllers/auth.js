@@ -1,6 +1,7 @@
 const {response} = require('express');
 const Usuario = require('../models/usuario');
 const bcrypt = require('bcryptjs');
+const { crearToken } = require('../helpers/jwt');
 
 const login = async(req, res = response) => {
 
@@ -26,9 +27,13 @@ const login = async(req, res = response) => {
             });
         }
 
+        //Llamaos al token
+        const token = await crearToken( usuarioDB.id );
+
         res.json({
             ok: true,
-            msg: 'Logueado'
+            msg: 'Logueado',
+            token
         });
         
     } catch (error) {
