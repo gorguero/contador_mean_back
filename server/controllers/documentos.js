@@ -23,10 +23,30 @@ const getMisDocumentos = async(req, res=response) => {
 }
 
 const crearDocumento = async(req, res=response) => {
-    res.json({
-        ok: true,
-        msg: 'Crear documento'
-    })
+    
+    const uid = req.uid;
+
+    const documento = new Documento({
+        usuario: uid,
+        ...req.body
+    });
+
+    console.log(documento)
+
+    try {
+        
+
+        res.json({
+            ok: true,
+            documento
+        });
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'Hubo un error al crear un documento'
+        });
+    }
+
 }
 
 const editarDocumento = async(req, res=response) => {

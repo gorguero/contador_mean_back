@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const {getDocumentos, getDocumentosByID, getMisDocumentos, crearDocumento, editarDocumento, actualizarDocumento, eliminarDocumento} = require('../controllers/documentos');
 const { validarCampos } = require('../middlewares/validaciones');
-const { validarJWT } = require('../middlewares/validarjwt');
+const { validarToken } = require('../middlewares/validarjwt');
 
 const router = Router();
 
