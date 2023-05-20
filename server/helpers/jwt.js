@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const secretPrivateKey = 'PR0YECTW3B';
+// const secretPrivateKey = 'PR0YECTW3B';
 
 const crearToken = ( uid ) => {
 
@@ -9,7 +9,7 @@ const crearToken = ( uid ) => {
             uid
         };
 
-        jwt.sign( payload, secretPrivateKey, {
+        jwt.sign( payload, process.env.secretPrivateKey, {
             expiresIn: '12h'
         }, (err, token) => {
             if( err ){

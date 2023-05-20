@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { getUsuarios, crearUsuario, actualizarUsuario, eliminarUsuario } = require('../controllers/usuarios');
 const { validarCampos } = require('../middlewares/validaciones');
+const { validarToken } = require('../middlewares/validarjwt');
 const router = Router();
 
 router.post('/', 
@@ -13,7 +14,7 @@ router.post('/',
     ]
 ,crearUsuario);
 
-router.get('/', getUsuarios);
+router.get('/', validarToken, getUsuarios);
 
 router.put('/:id',
     [
