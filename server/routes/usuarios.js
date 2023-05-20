@@ -20,8 +20,8 @@ router.put('/:id',
     [
         validarToken,
         check('nombre','El nombre es obligatorio').not().isEmpty(),
-        check('email','El email es obligatorio').not().isEmail(),
-        check('password','El password es obligatorio').not().isEmpty(),
+        check('email','El email es obligatorio').isEmail(),
+        check('rol','El rol es obligatorio').not().isEmpty(),
         validarCampos
     ] 
 ,actualizarUsuario);
