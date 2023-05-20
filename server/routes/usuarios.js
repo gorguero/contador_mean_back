@@ -18,6 +18,7 @@ router.get('/', validarToken, getUsuarios);
 
 router.put('/:id',
     [
+        validarToken,
         check('nombre','El nombre es obligatorio').not().isEmpty(),
         check('email','El email es obligatorio').not().isEmail(),
         check('password','El password es obligatorio').not().isEmpty(),
@@ -25,6 +26,6 @@ router.put('/:id',
     ] 
 ,actualizarUsuario);
 
-router.delete('/:id', eliminarUsuario)
+router.delete('/:id', validarToken, eliminarUsuario)
 
 module.exports = router;

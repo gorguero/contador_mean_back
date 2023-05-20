@@ -16,7 +16,8 @@ const validarToken = (req, res = response, next) => {
     try {
         
         const { uid } = jwt.verify(token, process.env.secretPrivateKey);
-        console.log(uid);
+        req.uid = uid;
+        next();
 
     } catch (error) {
         return res.status(400).json({
@@ -25,7 +26,6 @@ const validarToken = (req, res = response, next) => {
         })
     }
 
-    next();
 }
 
 
