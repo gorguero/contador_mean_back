@@ -53,10 +53,39 @@ const crearDocumento = async(req, res=response) => {
 
 //Actualizar documento seleccionado
 const editarDocumento = async(req, res=response) => {
-    res.json({
-        ok: true,
-        msg: 'Editar documento'
-    })
+
+    const id = req.params.id;
+    const uid = req.uid;
+    
+    try {
+
+        const documento = await Documento.findById( id );
+
+        if(!documento){
+            return res.status(404).json({
+                ok: false,
+                msg: 'Documento no encontrado'
+            });
+        }
+
+        const cambiosEnDocumento = {
+            ...req.body,
+            usuario: uid
+        }
+
+        const documentoActualizado = await Documento.findByIdAndUpdate(id, cambiosEnDocumento, {new: true});
+
+        res.json({
+            ok: true,
+            usuario: documentoActualizado
+        })
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'Hubo un error al editar el documento'
+        });
+    }
+
 }
 
 //Actualizar documento luego de crear el documento
@@ -95,6 +124,7 @@ const actualizarDocumento = async(req, res=response) => {
     }
 }
 
+//Eliminar documento
 const eliminarDocumento = async(req, res=response) => {
     res.json({
         ok: true,

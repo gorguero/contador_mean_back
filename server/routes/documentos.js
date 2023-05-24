@@ -29,7 +29,15 @@ router.put('/:id',
 actualizarDocumento);
 
 //Actualizar documento seleccionado
-router.put('/editar-documento/:id', editarDocumento);
+router.put('/editar-documento/:id',
+    [
+        check('nombre', "El nombre del documento es requerido").not().isEmpty(),
+        validarCampos,
+        validarToken
+    ],
+editarDocumento);
+
+//Eliminar documento
 router.delete('/:id', eliminarDocumento);
 
 module.exports = router;
