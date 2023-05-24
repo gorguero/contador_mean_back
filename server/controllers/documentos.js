@@ -126,10 +126,35 @@ const actualizarDocumento = async(req, res=response) => {
 
 //Eliminar documento
 const eliminarDocumento = async(req, res=response) => {
-    res.json({
-        ok: true,
-        msg: 'Eliminar documento'
-    })
+    
+    const uid = req.params.id;
+
+    try {
+
+        const existeDocumentoDB = await Documento.findById( uid );
+
+        if(!existeDocumentoDB){
+            return res.status(404).json({
+                ok: false,
+                msg: 'Documento no encontrado'
+            });
+        }
+
+        //Eliminación del documento
+        await Documento.findByIdAndDelete( uid );
+
+        res.json({
+            ok: true,
+            documento: 'Documento elimnado correctamente'
+        })
+        
+    } catch (error) {
+        res.status(500).json({
+            ok: true,
+            msg: 'Hubo un error al eliminar el documento'
+        })
+    }
+
 }
 
 module.exports = {
