@@ -5,7 +5,7 @@ const Documento = require('../models/documento');
 const getDocumentos = async(req, res=response) => {
     
     try {
-        const documentos = await Documento.find();
+        const documentos = await Documento.find().populate('usuario', 'nombre');
 
         res.json({
             ok: true,
