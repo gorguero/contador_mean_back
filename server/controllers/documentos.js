@@ -35,10 +35,12 @@ const crearDocumento = async(req, res=response) => {
 
     try {
         
+        //Salvando documento en la bd
+        const documentoDB = await documento.save();
 
         res.json({
             ok: true,
-            documento
+            documento: documentoDB
         });
     } catch (error) {
         res.status(500).json({
