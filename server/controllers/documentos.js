@@ -1,13 +1,26 @@
 const {response} = require('express');
 const Documento = require('../models/documento');
 
+//Obtenemos los documentos
 const getDocumentos = async(req, res=response) => {
-    res.json({
-        ok: true,
-        msg: 'Obteniendo documentos'
-    })
+    
+    try {
+        const documentos = await Documento.find();
+
+        res.json({
+            ok: true,
+            documentos
+        });
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'Hubo un error al obtener los documentos'
+        }); 
+    }
+
 }
 
+//Obtenemos los documentos por ID
 const getDocumentosByID = async(req, res=response) => {
     res.json({
         ok: true,
