@@ -6,8 +6,13 @@ const { validarToken } = require('../middlewares/validarjwt');
 
 const router = Router();
 
+//Obtener documento
 router.get('/', getDocumentos);
+
+//Obtener documento por ID
 router.get('/editar-documentos/:id', getDocumentosByID);
+
+
 router.get('/mis-documentos/:id', getMisDocumentos);
 
 //Crear documento

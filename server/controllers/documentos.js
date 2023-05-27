@@ -5,7 +5,7 @@ const Documento = require('../models/documento');
 const getDocumentos = async(req, res=response) => {
     
     try {
-        const documentos = await Documento.find().populate('usuario', 'nombre');
+        const documentos = await Documento.find().populate('usuario', 'nombre fecha pdf');
 
         res.json({
             ok: true,
@@ -22,10 +22,26 @@ const getDocumentos = async(req, res=response) => {
 
 //Obtenemos los documentos por ID
 const getDocumentosByID = async(req, res=response) => {
-    res.json({
-        ok: true,
-        msg: 'Obteniendo documento por ID'
-    })
+    
+    const id = req.params.id;
+
+    try {
+        
+        const documentos = await Documento.findById(id).populate('usuario', 'nombre fecha pdf');
+
+        res.json({
+            ok: true,
+            documentos
+        });
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Erro al obtener el documento por ese ID'
+        })
+    }
+
 }
 
 const getMisDocumentos = async(req, res=response) => {
