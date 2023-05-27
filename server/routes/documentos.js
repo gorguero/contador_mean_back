@@ -12,7 +12,7 @@ router.get('/', getDocumentos);
 //Obtener documento por ID
 router.get('/editar-documentos/:id', getDocumentosByID);
 
-
+//Obtener documentos del usuario
 router.get('/mis-documentos/:id', getMisDocumentos);
 
 //Crear documento

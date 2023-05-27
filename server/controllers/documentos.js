@@ -44,11 +44,26 @@ const getDocumentosByID = async(req, res=response) => {
 
 }
 
+//Obtenemos los documentos del usuario
 const getMisDocumentos = async(req, res=response) => {
-    res.json({
-        ok: true,
-        msg: 'Obteniendo mis documentos'
-    })
+    const id = req.params.id;
+
+    try {
+        
+        const documentos = await Documento.find({ usuario: id }).populate('usuario', 'nombre fecha pdf');
+
+        res.json({
+            ok: true,
+            documentos
+        });
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Erro al obtener el documento por ese ID'
+        })
+    }
 }
 
 //Crear documento
