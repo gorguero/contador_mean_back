@@ -4,9 +4,12 @@ const Documento = require('../models/documento');
 
 const getBuscar = async(req, res=response) => {
 
+    const searchParam = req.params.buscar;
+
     res.json({
         ok: true,
-        msg: 'ok en buscar'
+        msg: 'ok en buscar',
+        searchParam
     })
 
 }
