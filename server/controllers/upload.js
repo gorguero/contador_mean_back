@@ -53,7 +53,7 @@ const fileUpload = (req, res=response) => {
           });
         
         //Actualizar PDF
-        actualizarPDF();
+        actualizarPDF(coleccion, id, fileName);
 
         res.json({
             ok: true,
