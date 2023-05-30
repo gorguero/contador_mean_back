@@ -41,11 +41,23 @@ const fileUpload = (req, res=response) => {
     //Generando un identificador
     const fileName = `${uuidv4()}.${extensionFile}`;
 
-    res.json({
-        ok: true,
-        msg: 'Subiendo archivo',
-        nombreArchivo: fileName
-    })
+    //Path
+    const path = `./uploads/${coleccion}/${fileName}`;
+
+    file.mv(path, (err) => {
+        if (err)
+          return res.status(500).json({
+            ok:false,
+            msg: 'Erro en la ruta del archivo'
+          });
+    
+        res.json({
+            ok: true,
+            msg: 'Archivo en ruta',
+            fileName
+        });
+    });
+    
 }
 
 const retornarPDF = (req, res=response) => {
