@@ -1,5 +1,6 @@
 const {response} = require('express');
 const {v4: uuidv4} = require('uuid');
+const { actualizarPDF } = require('../helpers/actualizar-PDF');
 
 const fileUpload = (req, res=response) => {
 
@@ -50,14 +51,17 @@ const fileUpload = (req, res=response) => {
             ok:false,
             msg: 'Erro en la ruta del archivo'
           });
-    
+        
+        //Actualizar PDF
+        actualizarPDF();
+
         res.json({
             ok: true,
             msg: 'Archivo en ruta',
             fileName
         });
     });
-    
+
 }
 
 const retornarPDF = (req, res=response) => {
