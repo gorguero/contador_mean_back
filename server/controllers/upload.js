@@ -1,3 +1,6 @@
+const path = require('path');
+const fs = require('fs');
+
 const {response} = require('express');
 const {v4: uuidv4} = require('uuid');
 const { actualizarPDF } = require('../helpers/actualizar-PDF');
@@ -65,10 +68,19 @@ const fileUpload = (req, res=response) => {
 }
 
 const retornarPDF = (req, res=response) => {
-    res.json({
-        ok: true,
-        msg: 'Retornando archivo'
-    })
+    
+    const coleccion = req.params.coleccion;
+    const pdf = req.params.pdf;
+
+    const pathPDF = path.join(__dirname, `../uploads/${coleccion}/${pdf}`);
+
+    if( fs.existsSync(pathPDF) ){
+        res.sendFile(pathPDF);
+    }else{
+        const pathPDF = console.log('No se encontro el archivo');
+        res.sendFile(pathPDF);
+    }
+
 }
 
 module.exports = {
