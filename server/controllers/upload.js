@@ -1,4 +1,5 @@
 const {response} = require('express');
+const {v4: uuidv4} = require('uuid');
 
 const fileUpload = (req, res=response) => {
 
@@ -25,21 +26,25 @@ const fileUpload = (req, res=response) => {
 
     //Validamos la extension
     const file = req.files.pdf;
-    const acortarNombre = file.name.split('.');
-    const extensionDelArchivo = acortarNombre[acortarNombre.length - 1];
+    const shortName = file.name.split('.');
+    const extensionFile = shortName[shortName.length - 1];
 
     const validarExtensiones = ['pdf', 'xml', 'zip', 'rar'];
     
-    if(!validarExtensiones.includes(extensionDelArchivo)){
+    if(!validarExtensiones.includes(extensionFile)){
         return res.status(400).json({
             ok: false,
             msg: 'No es una extensión valida, solo pdf, xml, zip o rar'
         });
     }
 
+    //Generando un identificador
+    const fileName = `${uuidv4()}.${extensionFile}`;
+
     res.json({
         ok: true,
-        msg: 'Subiendo archivo'
+        msg: 'Subiendo archivo',
+        nombreArchivo: fileName
     })
 }
 
