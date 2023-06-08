@@ -46,8 +46,25 @@ const login = async(req, res = response) => {
 
 }
 
+const renovarToken = async( req, res = response ) => {
 
+    const uid = req.uid;
+
+    //Genera token
+    const token = await crearToken(uid);
+
+    //Obtenemos el usuario
+    const usuario = await Usuario.findById(uid);
+
+    res.json({
+        ok: true,
+        token,
+        usuario
+    })
+
+}
 
 module.exports = {
     login,
+    renovarToken
 }
