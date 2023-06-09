@@ -1,10 +1,13 @@
 const express = require('express');
+const cors = require('cors');
 const { dbCONN } = require('./database/db');
 require('dotenv').config();
 
 const app = express(); //Creación de nuestro servidor
 
 dbCONN(); //Coneccion con la bd 
+
+app.use( cors() ); //cors
 
 app.use( express.json() ); //Lectura del json
 
