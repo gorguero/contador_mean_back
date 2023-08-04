@@ -6,11 +6,6 @@ const getMenu = (rol = 'USER_ROL') => {
             icono: 'mdi mdi-folder-lock-open',
             url: '/dashboard/perfil'
         },
-        {
-            titulo: 'Mis Documentos',
-            icono: 'mdi mdi-folder-lock-open',
-            url: './documentos/mis-documentos/123'
-        },
     ];
 
     if( rol === 'ADMIN_ROL' ){
